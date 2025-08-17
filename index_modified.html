@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TripBack V2</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="exifr.umd.js"></script>
+  <style>
+    body { font-family: sans-serif; margin: 0; padding: 0; }
+    #map { height: 300px; margin-bottom: 1em; }
+    #travelStory { padding: 1em; background: #f0f8ff; }
+    #shareLink { margin: 1em; }
+    button { padding: 0.5em 1em; margin: 0.5em; }
+  </style>
+</head>
+<body>
+  <h1>TripBack V2 – Resedagbok</h1>
+  <div id="map"></div>
+  <div id="travelStory"></div>
+  <div id="shareLink"></div>
+  <button onclick="exportPDF()">Exportera som PDF</button>
+
+  <script>
+    // === Firebase-konfiguration ===
+    const firebaseConfig = {
+      apiKey: "AIzaSyAptTU7F2FD5G6ayNWldG1UQlAgycqpoGA",
+      authDomain: "travelmate-2025.firebaseapp.com",
+      projectId: "travelmate-2025",
+      storageBucket: "travelmate-2025.firebasestorage.app",
+      messagingSenderId: "717656692605",
+      appId: "1:717656692605:web:d7ea4a0ca62e68ec885e14",
+      measurementId: "G-2R8W7J6DBQ"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // === Exempeldata ===
+    const exampleTrip = {
+      location: "Åre",
+      date: "12 juli 2025",
+      temperature: 18,
+      weather: "soligt",
+      lat: 63.4,
+      lng: 13.1,
+      images: ["bild1.jpg", "bild2.jpg"]
+    };
+
+    // === AI-genererad resedagbok ===
+    function generateTravelStory(data) {
+      let story = `Den ${data.date} började jag min resa i ${data.location}. `;
+      story += `Vädret var ${data.weather} med ${data.temperature}°C. `;
+      story += `Jag tog ${data.images.length} bilder längs vägen. `;
+      story += `Det var en minnesvärd dag med fantastiska vyer och upplevelser.`;
+      document.getElementById("travelStory").innerText = story;
+    }
+
+    // === Spara resa till Firebase ===
+    async function saveTrip(data) {
+      const docRef = await db.collection("resor").add(data);
+      const shareLink = `https://tripback.web.app/resa/${docRef.id}`;
+      document.getElementById("shareLink").innerHTML = `<a href="${shareLink}" target="_blank">Dela min resa</a>`;
+    }
+
+    // === PDF-export ===
+    function exportPDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      doc.text(`Resedagbok: ${exampleTrip.location}`, 10, 10);
+      doc.text(`Datum: ${exampleTrip.date}`, 10, 20);
+      doc.text(`Temperatur: ${exampleTrip.temperature}°C`, 10, 30);
+      doc.text(`Väder: ${exampleTrip.weather}`, 10, 40);
+      doc.text(`Antal bilder: ${exampleTrip.images.length}`, 10, 50);
+      doc.save("resedagbok.pdf");
+    }
+
+    // === Demo-sekvens ===
+    function runDemo(data) {
+      const map = L.map('map').setView([data.lat, data.lng], 13);
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+      setTimeout(() => {
+        generateTravelStory(data);
+        document.getElementById("travelStory").style.background = "#e0ffe0";
+      }, 1000);
+      setTimeout(() => {
+        saveTrip(data);
+      }, 2000);
+    }
+
+    // === Initiera ===
+    document.addEventListener("DOMContentLoaded", () => {
+      runDemo(exampleTrip);
+    });
+  </script>
+</body>
+</html>
