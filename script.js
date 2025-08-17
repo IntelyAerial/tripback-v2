@@ -26,7 +26,7 @@ const map = new mapboxgl.Map({
 
 // 📸 Bildgalleri
 const imageGallery = document.getElementById('imageGallery');
-const imageList = ['bild1.jpg', 'bild2.jpg', 'bild3.jpg']; // Lägg till dina bilder här
+const imageList = ['bild1.jpeg', 'bild2.jpeg', 'bild3.jpeg']; // Lägg till dina bilder här
 imageList.forEach(src => {
   const img = document.createElement('img');
   img.src = src;
