@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TravelMate – Husbilsresor</title>
+
+  <!-- Stilar -->
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
+  <link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet" />
+
+  <!-- Ikoner och typsnitt -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" />
+</head>
+<body>
+  <header>
+    <h1>🚐 TravelMate – Min Husbilsresa</h1>
+    <nav>
+      <button id="startDemo">🎬 Starta demo</button>
+      <button id="exportPDF">📄 Exportera PDF</button>
+      <button id="shareTrip">🔗 Dela resa</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Karta -->
+    <section id="mapSection">
+      <h2>Karta</h2>
+      <div id="map"></div>
+    </section>
+
+    <!-- Bildgalleri -->
+    <section id="gallerySection">
+      <h2>Bildgalleri</h2>
+      <div id="imageGallery"></div>
+    </section>
+
+    <!-- Resedagbok -->
+    <section id="diarySection">
+      <h2>Resedagbok</h2>
+      <textarea id="diaryInput" placeholder="Skriv om dagens upplevelser..."></textarea>
+      <button id="generateDiary">✨ Generera med AI</button>
+      <div id="diaryOutput"></div>
+    </section>
+
+    <!-- Slideshow / Återblick -->
+    <section id="slideshowSection">
+      <h2>Återblick</h2>
+      <div id="slideshowContainer">
+        <img id="slideshowImage" src="" alt="Resebild" />
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 TravelMate</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
