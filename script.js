@@ -2,6 +2,7 @@
 const firebaseConfig = {
   apiKey: "AIzaSyAptTU7F2FD5G6ayNWldG1UQlAgycqpoGA",
   authDomain: "travelmate-2025.firebaseapp.com",
+  databaseURL: "https://travelmate-2025-default-rtdb.firebaseio.com", // ✅ Lägg till denna rad
   projectId: "travelmate-2025",
   storageBucket: "travelmate-2025.firebasestorage.app",
   messagingSenderId: "717656692605",
