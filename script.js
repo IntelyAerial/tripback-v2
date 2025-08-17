@@ -16,7 +16,7 @@ const db = firebase.database();
 
 
 // 🗺️ Mapbox-karta
-mapboxgl.accessToken = 'DIN_MAPBOX_TOKEN';
+mapboxgl.accessToken = 'pk.eyJ1IjoibWFnbnVzc2pvbG9mIiwiYSI6ImNtZGRwNnA3czA3bjUybnNidnJvamJ1MnMifQ.ndMGGOP-nNL-BwAB_vJuLQ';
 const map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/mapbox/streets-v12',
