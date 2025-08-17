@@ -8,8 +8,12 @@ const firebaseConfig = {
   appId: "1:717656692605:web:d7ea4a0ca62e68ec885e14",
   measurementId: "G-2R8W7J6DBQ"
 };
+
+
+// ✅ Initiera Firebase med compat-version
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
+
 
 // 🗺️ Mapbox-karta
 mapboxgl.accessToken = 'DIN_MAPBOX_TOKEN';
